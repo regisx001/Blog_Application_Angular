@@ -1,12 +1,11 @@
 <ng-container *ngIf="chatService.state$ | async as state">
   <div
-    class="chatbot-container fixed bottom-24 right-6 w-full max-w-sm bg-white rounded-lg shadow-xl z-40 transform origin-bottom-right transition-all"
+    class="chatbot-container fixed bottom-24 p-card right-6 w-full max-w-sm rounded-lg shadow-xl z-40 transform origin-bottom-right transition-all"
     [ngClass]="{
       'scale-100 opacity-100': state.isChatVisible,
       'scale-0 opacity-0': !state.isChatVisible
     }"
   >
-    <!-- Chat header -->
     <app-chat-header
       title="Assistant"
       subtitle="Online"
@@ -16,9 +15,7 @@
       (onExpand)="chatService.expandToFullscreen()"
     ></app-chat-header>
 
-    <!-- Chat content -->
     <div #chatContainer class="chat-container px-4 py-3">
-      <!-- Messages -->
       <ng-container *ngFor="let message of state.messageHistory">
         <app-message-item
           [message]="message"
@@ -26,14 +23,12 @@
         ></app-message-item>
       </ng-container>
 
-      <!-- Typing indicator -->
       <app-typing-indicator
         *ngIf="state.isTyping"
         [isFullscreen]="false"
       ></app-typing-indicator>
     </div>
 
-    <!-- Input area -->
     <div class="border-t px-4 py-3">
       <app-chat-input [isFullscreen]="false"></app-chat-input>
       <app-suggestion-chips

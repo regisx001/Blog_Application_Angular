@@ -13,12 +13,15 @@ import { ChatHeaderComponent } from '../chat-header/chat-header.component';
 import { TypingIndicatorComponent } from '../typing-indicator/typing-indicator.component';
 import { ChatInputComponent } from '../chat-input/chat-input.component';
 import { SuggestionChipsComponent } from '../suggestion-chips/suggestion-chips.component';
-
+import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
 @Component({
   selector: 'app-chat-window',
   imports: [
     CommonModule,
     FormsModule,
+    ButtonModule,
+    CardModule,
     MessageItemComponent,
     ChatHeaderComponent,
     TypingIndicatorComponent,
