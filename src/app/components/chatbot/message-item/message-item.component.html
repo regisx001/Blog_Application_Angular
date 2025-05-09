@@ -1,0 +1,76 @@
+<div
+  class="flex mb-4"
+  [ngClass]="{
+    'justify-end': message.sender === 'user',
+    'flex-row-reverse': message.sender === 'user' && isFullscreen
+  }"
+>
+  <!-- User message -->
+  <ng-container *ngIf="message.sender === 'user'">
+    <div
+      [ngClass]="
+        isFullscreen
+          ? 'mr-4 bg-gray-100 py-3 px-4 rounded-lg max-w-prose'
+          : 'chat-bubble-user py-2 px-3 max-w-xs'
+      "
+    >
+      <p
+        [class.text-sm]="!isFullscreen"
+        [innerHTML]="
+          isFullscreen
+            ? chatService.formatMessageText(message.text)
+            : message.text
+        "
+      ></p>
+    </div>
+    <div
+      class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0"
+      [ngClass]="isFullscreen ? '' : 'ml-2'"
+    >
+      <!-- User icon SVG -->
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 448 512"
+        class="w-4 h-4 fill-gray-500"
+      >
+        <path
+          d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"
+        />
+      </svg>
+    </div>
+  </ng-container>
+
+  <!-- Bot message -->
+  <ng-container *ngIf="message.sender === 'bot'">
+    <div
+      class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0"
+    >
+      <!-- Robot icon SVG -->
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 640 512"
+        class="w-4 h-4 fill-blue-600"
+      >
+        <path
+          d="M320 0c17.7 0 32 14.3 32 32v64h128c35.3 0 64 28.7 64 64v288c0 35.3-28.7 64-64 64H160c-35.3 0-64-28.7-64-64V160c0-35.3 28.7-64 64-64h128V32c0-17.7 14.3-32 32-32zM192 352c0 8.8-7.2 16-16 16s-16-7.2-16-16V224c0-8.8 7.2-16 16-16s16 7.2 16 16v128zm96 0c0 8.8-7.2 16-16 16s-16-7.2-16-16V224c0-8.8 7.2-16 16-16s16 7.2 16 16v128zm96 0c0 8.8-7.2 16-16 16s-16-7.2-16-16V224c0-8.8 7.2-16 16-16s16 7.2 16 16v128zM304 128H160c-8.8 0-16 7.2-16 16v48H352v-48c0-8.8-7.2-16-16-16h-32z"
+        />
+      </svg>
+    </div>
+    <div
+      [ngClass]="
+        isFullscreen
+          ? 'ml-4 chat-bubble-bot py-3 px-4 rounded-lg max-w-prose'
+          : 'ml-2 chat-bubble-bot py-2 px-3 max-w-xs'
+      "
+    >
+      <p
+        [class.text-sm]="!isFullscreen"
+        [innerHTML]="
+          isFullscreen
+            ? chatService.formatMessageText(message.text)
+            : message.text
+        "
+      ></p>
+    </div>
+  </ng-container>
+</div>

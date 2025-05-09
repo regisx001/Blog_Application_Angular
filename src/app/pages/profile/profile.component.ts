@@ -17,7 +17,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.http
       .get(this.BACKEND_URL + '/users/me')
-      .pipe(tap((response) => console.log('User data:', response)))
+      // .pipe(tap((response) => console.log('User data:', response)))
       .subscribe({
         next: (userData) => {
           this.data = userData;

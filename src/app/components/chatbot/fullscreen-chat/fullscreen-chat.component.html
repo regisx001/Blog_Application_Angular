@@ -1,0 +1,150 @@
+<ng-container *ngIf="chatService.state$ | async as state">
+  <div
+    *ngIf="state.isFullscreenMode"
+    class="fixed inset-0 bg-white z-50 flex flex-col"
+  >
+    <!-- Fullscreen header -->
+    <app-chat-header
+      title="AI Assistant"
+      subtitle="Here to help with anything you need"
+      [isFullscreen]="true"
+      [showMinimize]="false"
+      (onClose)="chatService.closeFullscreen()"
+      (onNewChat)="startNewChat()"
+    ></app-chat-header>
+
+    <!-- Fullscreen layout -->
+    <div class="flex flex-1 overflow-hidden">
+      <!-- Sidebar -->
+      <div class="w-64 bg-gray-100 border-r border-gray-200 flex flex-col">
+        <div class="p-4">
+          <h3 class="font-medium text-gray-700 mb-2">Recent Conversations</h3>
+          <div class="space-y-2">
+            <div
+              *ngFor="let chat of chatService.chatHistories"
+              [ngClass]="{
+                'bg-blue-100': chat.isActive,
+                'hover:bg-gray-200': !chat.isActive
+              }"
+              class="p-3 rounded-lg cursor-pointer"
+            >
+              <p
+                [ngClass]="{
+                  'text-blue-800': chat.isActive,
+                  'text-gray-800': !chat.isActive
+                }"
+                class="font-medium text-sm"
+              >
+                {{ chat.title }}
+              </p>
+              <p class="text-xs text-gray-600 truncate">{{ chat.timestamp }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-auto p-4 border-t border-gray-200">
+          <div
+            class="flex items-center justify-between text-gray-700 cursor-pointer hover:text-blue-600"
+          >
+            <div class="flex items-center">
+              <!-- Settings/Gear icon SVG -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
+                class="w-4 h-4 fill-current mr-2"
+              >
+                <path
+                  d="M495.9 166.6c3.2 8.7 .5 18.4-6.4 24.6l-43.3 39.4c1.1 8.3 1.7 16.8 1.7 25.4s-.6 17.1-1.7 25.4l43.3 39.4c6.9 6.2 9.6 15.9 6.4 24.6c-4.4 11.9-9.7 23.3-15.8 34.3l-4.7 8.1c-6.6 11-14 21.4-22.1 31.2c-5.9 7.2-15.7 9.6-24.5 6.8l-55.7-17.7c-13.4 10.3-28.2 18.9-44 25.4l-12.5 57.1c-2 9.1-9 16.3-18.2 17.8c-13.8 2.3-28 3.5-42.5 3.5s-28.7-1.2-42.5-3.5c-9.2-1.5-16.2-8.7-18.2-17.8l-12.5-57.1c-15.8-6.5-30.6-15.1-44-25.4L83.1 425.9c-8.8 2.8-18.6 .3-24.5-6.8c-8.1-9.8-15.5-20.2-22.1-31.2l-4.7-8.1c-6.1-11-11.4-22.4-15.8-34.3c-3.2-8.7-.5-18.4 6.4-24.6l43.3-39.4C64.6 273.1 64 264.6 64 256s.6-17.1 1.7-25.4L22.4 191.2c-6.9-6.2-9.6-15.9-6.4-24.6c4.4-11.9 9.7-23.3 15.8-34.3l4.7-8.1c6.6-11 14-21.4 22.1-31.2c5.9-7.2 15.7-9.6 24.5-6.8l55.7 17.7c13.4-10.3 28.2-18.9 44-25.4l12.5-57.1c2-9.1 9-16.3 18.2-17.8C227.3 1.2 241.5 0 256 0s28.7 1.2 42.5 3.5c9.2 1.5 16.2 8.7 18.2 17.8l12.5 57.1c15.8 6.5 30.6 15.1 44 25.4l55.7-17.7c8.8-2.8 18.6-.3 24.5 6.8c8.1 9.8 15.5 20.2 22.1 31.2l4.7 8.1c6.1 11 11.4 22.4 15.8 34.3zM256 336a80 80 0 1 0 0-160 80 80 0 1 0 0 160z"
+                />
+              </svg>
+              <span>Settings</span>
+            </div>
+            <div>
+              <!-- Chevron right icon SVG -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 320 512"
+                class="w-3 h-3 fill-current"
+              >
+                <path
+                  d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main chat area -->
+      <div class="flex-1 flex flex-col">
+        <!-- Messages container -->
+        <div #messagesContainer class="flex-1 overflow-y-auto p-6">
+          <!-- Welcome message -->
+          <div
+            class="max-w-3xl mx-auto"
+            *ngIf="state.messageHistory.length === 1"
+          >
+            <div class="flex items-start mb-6">
+              <div
+                class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0"
+              >
+                <!-- Robot icon SVG -->
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 640 512"
+                  class="w-4 h-4 fill-blue-600"
+                >
+                  <path
+                    d="M320 0c17.7 0 32 14.3 32 32v64h128c35.3 0 64 28.7 64 64v288c0 35.3-28.7 64-64 64H160c-35.3 0-64-28.7-64-64V160c0-35.3 28.7-64 64-64h128V32c0-17.7 14.3-32 32-32zM192 352c0 8.8-7.2 16-16 16s-16-7.2-16-16V224c0-8.8 7.2-16 16-16s16 7.2 16 16v128zm96 0c0 8.8-7.2 16-16 16s-16-7.2-16-16V224c0-8.8 7.2-16 16-16s16 7.2 16 16v128zm96 0c0 8.8-7.2 16-16 16s-16-7.2-16-16V224c0-8.8 7.2-16 16-16s16 7.2 16 16v128zM304 128H160c-8.8 0-16 7.2-16 16v48H352v-48c0-8.8-7.2-16-16-16h-32z"
+                  />
+                </svg>
+              </div>
+              <div
+                class="ml-4 chat-bubble-bot py-3 px-4 rounded-lg max-w-prose"
+              >
+                <p>
+                  Hello! I'm your AI assistant, ready to help with your
+                  questions and tasks. You can ask me anything, and I'll do my
+                  best to assist you.
+                </p>
+                <p class="mt-2">Here are some things I can help you with:</p>
+                <ul class="list-disc ml-6 mt-2">
+                  <li>Answer questions about products and services</li>
+                  <li>Provide information about shipping and returns</li>
+                  <li>Troubleshoot common issues</li>
+                  <li>Offer recommendations based on your preferences</li>
+                </ul>
+                <p class="mt-2">What can I help you with today?</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Messages -->
+          <ng-container
+            *ngFor="let message of state.messageHistory; let i = index"
+          >
+            <div
+              *ngIf="i > 0 || state.messageHistory.length === 1"
+              class="max-w-3xl mx-auto"
+            >
+              <app-message-item
+                [message]="message"
+                [isFullscreen]="true"
+              ></app-message-item>
+            </div>
+          </ng-container>
+
+          <!-- Fullscreen typing indicator -->
+          <app-typing-indicator
+            *ngIf="state.isFullscreenTyping"
+            [isFullscreen]="true"
+          ></app-typing-indicator>
+        </div>
+
+        <!-- Input area -->
+        <div class="border-t border-gray-200 p-4 bg-white">
+          <app-chat-input [isFullscreen]="true"></app-chat-input>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

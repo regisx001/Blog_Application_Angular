@@ -7,3 +7,38 @@ html,
 body {
   height: 100%;
 }
+/* Used by all components */
+.chat-container {
+  max-height: 350px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.chat-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-container::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.5);
+  border-radius: 3px;
+}
+
+.chat-bubble-user {
+  background-color: #e2e8f0;
+  border-radius: 18px 18px 0 18px;
+}
+
+.chat-bubble-bot {
+  background-color: #3b82f6;
+  color: white;
+  border-radius: 18px 18px 18px 0;
+}
+
+.chatbot-container {
+  transition: all 0.3s ease;
+}
+
+.fullscreen-chat-container {
+  height: calc(100vh - 120px);
+  max-height: unset;
+}
