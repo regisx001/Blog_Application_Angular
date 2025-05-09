@@ -1,5 +1,39 @@
-<nav class="w-full">
-  <p-button (onClick)="authService.logout()" label="logout" />
-</nav>
+<div class="shadow-md rounded-md p-2 mb-4">
+  <p-menubar styleClass="border-none">
+    <ng-template pTemplate="start">
+      <h2 class="text-2xl font-bold text-primary m-0 pl-3">AuthNG</h2>
+    </ng-template>
+    <ng-template pTemplate="end">
+      <div class="flex flex-row items-center gap-3">
+        <a
+          link="true"
+          routerLink="/dashboard"
+          routerLinkActive="!bg-primary-100 !text-primary-700 !font-bold"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="p-button p-button-text font-semibold hover:bg-primary-50 transition-colors"
+        >
+          Dashboard
+        </a>
+
+        <a
+          link="true"
+          routerLink="/dashboard/profile"
+          routerLinkActive="!bg-primary-100 !text-primary-700 !font-bold"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="p-button p-button-text font-semibold hover:bg-primary-50 transition-colors"
+        >
+          Profile
+        </a>
+
+        <p-button
+          (onClick)="authService.logout()"
+          label="Logout"
+          styleClass="p-button-danger p-button-outlined"
+          icon="pi pi-sign-out"
+        ></p-button>
+      </div>
+    </ng-template>
+  </p-menubar>
+</div>
 
 <router-outlet />

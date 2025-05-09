@@ -32,9 +32,15 @@ importers:
       '@primeng/themes':
         specifier: ^19.1.2
         version: 19.1.2
+      '@tailwindcss/forms':
+        specifier: ^0.5.10
+        version: 0.5.10(tailwindcss@4.1.5)
       '@tailwindcss/postcss':
         specifier: ^4.1.5
         version: 4.1.5
+      '@tailwindcss/typography':
+        specifier: ^0.5.16
+        version: 0.5.16(tailwindcss@4.1.5)
       postcss:
         specifier: ^8.5.3
         version: 8.5.3
@@ -1604,6 +1610,11 @@ packages:
   '@socket.io/component-emitter@3.1.2':
     resolution: {integrity: sha512-9BCxFwvbGg/RsZK9tjXd8s4UcwR0MWeFQ1XEKIQVVvAGJyINdrqKMcTRyLoK8Rse1GjzLV9cwjWV1olXRWEXVA==}
 
+  '@tailwindcss/forms@0.5.10':
+    resolution: {integrity: sha512-utI1ONF6uf/pPNO68kmN1b8rEwNXv3czukalo8VtJH8ksIkZXr3Q3VYudZLkCsDd4Wku120uF02hYK25XGPorw==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0 || >= 3.0.0-alpha.1 || >= 4.0.0-alpha.20 || >= 4.0.0-beta.1'
+
   '@tailwindcss/node@4.1.5':
     resolution: {integrity: sha512-CBhSWo0vLnWhXIvpD0qsPephiaUYfHUX3U9anwDaHZAeuGpTiB3XmsxPAN6qX7bFhipyGBqOa1QYQVVhkOUGxg==}
 
@@ -1691,6 +1702,11 @@ packages:
 
   '@tailwindcss/postcss@4.1.5':
     resolution: {integrity: sha512-5lAC2/pzuyfhsFgk6I58HcNy6vPK3dV/PoPxSDuOTVbDvCddYHzHiJZZInGIY0venvzzfrTEUAXJFULAfFmObg==}
+
+  '@tailwindcss/typography@0.5.16':
+    resolution: {integrity: sha512-0wDLwCVF5V3x3b1SGXPCDcdsbDHMBe+lkFzBRaHeLvNi+nrrnZ1lA18u+OTWO8iSWU2GxUOCvlXtDuqftc1oiA==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0 || insiders || >=4.0.0-alpha.20 || >=4.0.0-beta.1'
 
   '@tufjs/canonical-json@2.0.0':
     resolution: {integrity: sha512-yVtV8zsdo8qFHe+/3kw81dSLyF7D576A5cCFCi4X7B39tWT7SekaEFUnvnWJHz+9qO7qJTah1JbrDjWKqFtdWA==}
@@ -3119,6 +3135,9 @@ packages:
   lodash-es@4.17.21:
     resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
 
+  lodash.castarray@4.4.0:
+    resolution: {integrity: sha512-aVx8ztPv7/2ULbArGJ2Y42bG1mEQ5mGjpdvrbJcJFU3TbYybe+QlLS4pst9zV52ymy2in1KpFPiZnAOATxD4+Q==}
+
   lodash.clonedeep@4.5.0:
     resolution: {integrity: sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==}
 
@@ -3128,6 +3147,12 @@ packages:
   lodash.isequal@4.5.0:
     resolution: {integrity: sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==}
     deprecated: This package is deprecated. Use require('node:util').isDeepStrictEqual instead.
+
+  lodash.isplainobject@4.0.6:
+    resolution: {integrity: sha512-oSXzaWypCMHkPC3NvBEaPHf0KsA5mvPrOPgQWDsbg8n7orZ290M0BmC/jgRZ4vcJ6DTAhjrsSYgdsW/F+MFOBA==}
+
+  lodash.merge@4.6.2:
+    resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
 
   lodash@4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
@@ -3230,6 +3255,10 @@ packages:
     engines: {node: '>= 12.13.0'}
     peerDependencies:
       webpack: ^5.0.0
+
+  mini-svg-data-uri@1.4.4:
+    resolution: {integrity: sha512-r9deDe9p5FJUPZAk3A59wGH7Ii9YrjjWw0jmw/liSbHl2CHiyXj6FcDXDu2K3TjVAXqiJdaw3xxwlZZr9E6nHg==}
+    hasBin: true
 
   minimalistic-assert@1.0.1:
     resolution: {integrity: sha512-UtJcAD4yEaGtjPezWuO9wC4nwUnVH/8/Im3yEHQP4b67cXlD/Qr9hdITCU1xDbSEXg2XKNaP8jsReV7vQd00/A==}
@@ -3606,6 +3635,10 @@ packages:
     engines: {node: ^10 || ^12 || >= 14}
     peerDependencies:
       postcss: ^8.1.0
+
+  postcss-selector-parser@6.0.10:
+    resolution: {integrity: sha512-IQ7TZdoaqbT+LCpShg46jnZVlhWD2w6iQYAcYXfHARZ7X1t/UGhhceQDs5X0cGqKvYlHNOuv7Oa1xmb0oQuA3w==}
+    engines: {node: '>=4'}
 
   postcss-selector-parser@7.1.0:
     resolution: {integrity: sha512-8sLjZwK0R+JlxlYcTuVnyT2v+htpdrjDOKuMcOVdYjt52Lh8hWRYpxBPoKx/Zg+bcjc3wx6fmQevMmUztS/ccA==}
@@ -6091,6 +6124,11 @@ snapshots:
 
   '@socket.io/component-emitter@3.1.2': {}
 
+  '@tailwindcss/forms@0.5.10(tailwindcss@4.1.5)':
+    dependencies:
+      mini-svg-data-uri: 1.4.4
+      tailwindcss: 4.1.5
+
   '@tailwindcss/node@4.1.5':
     dependencies:
       enhanced-resolve: 5.18.1
@@ -6155,6 +6193,14 @@ snapshots:
       '@tailwindcss/node': 4.1.5
       '@tailwindcss/oxide': 4.1.5
       postcss: 8.5.3
+      tailwindcss: 4.1.5
+
+  '@tailwindcss/typography@0.5.16(tailwindcss@4.1.5)':
+    dependencies:
+      lodash.castarray: 4.4.0
+      lodash.isplainobject: 4.0.6
+      lodash.merge: 4.6.2
+      postcss-selector-parser: 6.0.10
       tailwindcss: 4.1.5
 
   '@tufjs/canonical-json@2.0.0': {}
@@ -7697,11 +7743,17 @@ snapshots:
 
   lodash-es@4.17.21: {}
 
+  lodash.castarray@4.4.0: {}
+
   lodash.clonedeep@4.5.0: {}
 
   lodash.debounce@4.0.8: {}
 
   lodash.isequal@4.5.0: {}
+
+  lodash.isplainobject@4.0.6: {}
+
+  lodash.merge@4.6.2: {}
 
   lodash@4.17.21: {}
 
@@ -7809,6 +7861,8 @@ snapshots:
       schema-utils: 4.3.2
       tapable: 2.2.1
       webpack: 5.98.0(esbuild@0.25.4)
+
+  mini-svg-data-uri@1.4.4: {}
 
   minimalistic-assert@1.0.1: {}
 
@@ -8192,6 +8246,11 @@ snapshots:
     dependencies:
       icss-utils: 5.1.0(postcss@8.5.3)
       postcss: 8.5.3
+
+  postcss-selector-parser@6.0.10:
+    dependencies:
+      cssesc: 3.0.0
+      util-deprecate: 1.0.2
 
   postcss-selector-parser@7.1.0:
     dependencies:

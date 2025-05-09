@@ -4,9 +4,21 @@ import { AuthService } from '../../auth/auth.service';
 import { Router, RouterModule } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { RippleModule } from 'primeng/ripple';
+import { CheckboxModule } from 'primeng/checkbox';
+import { PasswordModule } from 'primeng/password';
+
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, ButtonModule, RouterModule, InputTextModule],
+  imports: [
+    FormsModule,
+    ButtonModule,
+    RouterModule,
+    InputTextModule,
+    RippleModule,
+    CheckboxModule,
+    PasswordModule,
+  ],
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
@@ -17,6 +29,7 @@ export class LoginComponent {
     email: '',
     password: '',
   };
+  checked = false;
 
   onLogin() {
     this.authService.login(this.credentiels);

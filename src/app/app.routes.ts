@@ -5,6 +5,7 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { authGuard } from './auth/auth.guard';
 import { redirectIfAuthenticatedGuard } from './auth/redirect-if-authenticated.guard';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -14,12 +15,17 @@ export const routes: Routes = [
     canActivate: [redirectIfAuthenticatedGuard],
   },
   {
-    path: '',
+    path: 'dashboard',
     component: LayoutComponent,
     children: [
       {
-        path: 'dashboard',
+        path: '',
         component: DashboardComponent,
+        canActivate: [authGuard],
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent,
         canActivate: [authGuard],
       },
     ],

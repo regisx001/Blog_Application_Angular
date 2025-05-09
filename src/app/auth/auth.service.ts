@@ -21,7 +21,7 @@ export class AuthService {
       )
       .subscribe((res) => {
         this.saveTokens(res.accessToken, res.refreshToken);
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/dashboard/profile']);
       });
   }
 
