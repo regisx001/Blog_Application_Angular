@@ -4,12 +4,12 @@ import { AuthService } from '../../auth/auth.service';
 import { ButtonModule } from 'primeng/button';
 import { MenubarModule } from 'primeng/menubar';
 import { RouterModule } from '@angular/router';
-import { ChatbotComponent } from '../chatbot/chatbot.component';
+// import { ChatbotComponent } from '../chatbot/chatbot.component';
 @Component({
   selector: 'app-layout',
   imports: [
     RouterOutlet,
-    ChatbotComponent,
+    // ChatbotComponent,
     RouterModule,
     ButtonModule,
     MenubarModule,
