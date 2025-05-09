@@ -8,14 +8,21 @@ import { AuthService } from '../../auth/auth.service';
   imports: [],
   templateUrl: './dashboard.component.html',
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   private http = inject(HttpClient);
   private BACKEND_URL = environment.BACKEND_URL;
 
+  data = [];
   private authService = inject(AuthService);
-  constructor() {
+
+  ngOnInit() {
     this.http.get(this.BACKEND_URL + '/users').subscribe((res: any) => {
-      console.log(res);
+      // console.log(res?.content);
+      this.data = res?.content;
     });
+  }
+
+  stringity(data: any) {
+    return JSON.stringify(data, null, 2);
   }
 }

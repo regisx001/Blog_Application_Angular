@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject, tap } from 'rxjs';
 import { environment } from '../../environments/environment.development';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +11,7 @@ export class AuthService {
   private BACKEND_URL = environment.BACKEND_URL;
 
   private http = inject(HttpClient);
+  private router = inject(Router);
 
   login(credentials: { email: string; password: string }) {
     return this.http
@@ -19,6 +21,7 @@ export class AuthService {
       )
       .subscribe((res) => {
         this.saveTokens(res.accessToken, res.refreshToken);
+        this.router.navigate(['/dashboard']);
       });
   }
 
