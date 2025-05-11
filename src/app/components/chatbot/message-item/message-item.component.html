@@ -2,18 +2,19 @@
   class="flex mb-4"
   [ngClass]="{
     'justify-end': message.sender === 'user',
-    'flex-row-reverse': message.sender === 'user' && isFullscreen
+    'justify-start': message.sender === 'bot'
   }"
 >
   <!-- User message -->
   <ng-container *ngIf="message.sender === 'user'">
+    <!-- User message bubble -->
     <div
-      id="something"
-      [ngClass]="
-        isFullscreen ? 'mr-4 py-3 px-4 max-w-prose' : ' py-2 px-3 max-w-xs'
-      "
-      [ngStyle]="{ 'border-radius': '18px 18px 0 18px' }"
-      class="bg-slate-600"
+      [ngClass]="{
+        'mr-4 py-3 px-4 max-w-prose': isFullscreen,
+        'py-2 px-3 max-w-xs': !isFullscreen,
+        'bg-slate-600 text-white': true
+      }"
+      class="message-bubble message-bubble-user"
     >
       <p
         [class.text-sm]="!isFullscreen"
@@ -24,9 +25,9 @@
         "
       ></p>
     </div>
+    <!-- User avatar -->
     <div
       class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0"
-      [ngClass]="isFullscreen ? '' : 'ml-2'"
     >
       <!-- User icon SVG -->
       <svg
@@ -43,6 +44,7 @@
 
   <!-- Bot message -->
   <ng-container *ngIf="message.sender === 'bot'">
+    <!-- Bot avatar -->
     <div
       class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0"
     >
@@ -57,14 +59,14 @@
         />
       </svg>
     </div>
+    <!-- Bot message bubble -->
     <div
-      [ngClass]="
-        isFullscreen
-          ? 'ml-4  py-3 px-4 rounded-lg max-w-prose'
-          : 'ml-2  py-2 px-3 max-w-xs'
-      "
-      class="bg-teal-700"
-      [ngStyle]="{ 'border-radius': '18px 18px 0 18px' }"
+      [ngClass]="{
+        'ml-4 py-3 px-4 max-w-prose': isFullscreen,
+        'ml-2 py-2 px-3 max-w-xs': !isFullscreen,
+        'bg-teal-700 text-white': true
+      }"
+      class="message-bubble message-bubble-bot"
     >
       <p
         [class.text-sm]="!isFullscreen"

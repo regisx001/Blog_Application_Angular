@@ -1,0 +1,13 @@
+.message-bubble {
+  border-radius: 18px 18px 0 18px;
+}
+
+.message-bubble-user {
+  background-color: #64748b; /* Tailwind's slate-600 */
+  color: white;
+}
+
+.message-bubble-bot {
+  background-color: #0f766e; /* Tailwind's teal-700 */
+  color: white;
+}
