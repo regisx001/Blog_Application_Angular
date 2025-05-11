@@ -1,6 +1,6 @@
 <ng-container *ngIf="chatService.state$ | async as state">
   <div
-    class="chatbot-container fixed bottom-24 p-card right-6 w-full max-w-sm rounded-lg shadow-xl z-40 transform origin-bottom-right transition-all"
+    class="chatbot-container bg-surface-700 fixed bottom-24 p-card right-6 w-full max-w-sm rounded-lg shadow-xl z-40 transform origin-bottom-right transition-all"
     [ngClass]="{
       'scale-100 opacity-100': state.isChatVisible,
       'scale-0 opacity-0': !state.isChatVisible

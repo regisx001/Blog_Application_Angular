@@ -1,18 +1,18 @@
 <div
   [ngClass]="isFullscreen ? 'px-6 py-4' : 'px-4 py-3 rounded-t-lg'"
-  class="bg-blue-600 text-white flex justify-between items-center shadow-md"
+  class="bg-surface-800 flex justify-between items-center shadow-md"
 >
   <div class="flex items-center">
     <div
       [ngClass]="isFullscreen ? 'w-10 h-10' : 'w-8 h-8'"
-      class="bg-white rounded-full flex items-center justify-center mr-3"
+      class="dark:bg-white rounded-full flex items-center justify-center mr-3"
     >
       <!-- Robot icon SVG -->
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 640 512"
         [ngClass]="isFullscreen ? 'w-5 h-5' : 'w-4 h-4'"
-        class="fill-blue-600"
+        class="fill-primary-700"
       >
         <path
           d="M320 0c17.7 0 32 14.3 32 32v64h128c35.3 0 64 28.7 64 64v288c0 35.3-28.7 64-64 64H160c-35.3 0-64-28.7-64-64V160c0-35.3 28.7-64 64-64h128V32c0-17.7 14.3-32 32-32zM192 352c0 8.8-7.2 16-16 16s-16-7.2-16-16V224c0-8.8 7.2-16 16-16s16 7.2 16 16v128zm96 0c0 8.8-7.2 16-16 16s-16-7.2-16-16V224c0-8.8 7.2-16 16-16s16 7.2 16 16v128zm96 0c0 8.8-7.2 16-16 16s-16-7.2-16-16V224c0-8.8 7.2-16 16-16s16 7.2 16 16v128zM304 128H160c-8.8 0-16 7.2-16 16v48H352v-48c0-8.8-7.2-16-16-16h-32z"
@@ -23,7 +23,7 @@
       <h2 [ngClass]="isFullscreen ? 'text-xl' : ''" class="font-medium">
         {{ title }}
       </h2>
-      <p [ngClass]="isFullscreen ? 'text-sm' : 'text-xs'" class="text-blue-100">
+      <p [ngClass]="isFullscreen ? 'text-sm' : 'text-xs'" class="">
         {{ subtitle }}
       </p>
     </div>
@@ -31,10 +31,7 @@
 
   <div class="flex items-center">
     <ng-container *ngIf="isFullscreen">
-      <button
-        (click)="onNewChat.emit()"
-        class="bg-blue-700 hover:bg-blue-800 text-white rounded-lg py-2 px-4 mr-4 flex items-center"
-      >
+      <button (click)="onNewChat.emit()" class="p-button rounded-lg mr-4">
         <!-- Plus icon SVG -->
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -50,10 +47,7 @@
     </ng-container>
 
     <ng-container *ngIf="!isFullscreen">
-      <button
-        (click)="onExpand.emit()"
-        class="text-white hover:text-gray-200 mr-3"
-      >
+      <button (click)="onExpand.emit()" class="mr-3">
         <!-- Expand icon SVG -->
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -66,11 +60,7 @@
         </svg>
       </button>
 
-      <button
-        *ngIf="showMinimize"
-        (click)="onMinimize.emit()"
-        class="text-white hover:text-gray-200 mr-3"
-      >
+      <button *ngIf="showMinimize" (click)="onMinimize.emit()" class="mr-3">
         <!-- Minus icon SVG -->
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -87,7 +77,7 @@
     <button
       (click)="onClose.emit()"
       [ngClass]="isFullscreen ? 'text-2xl' : ''"
-      class="text-white hover:text-gray-200"
+      class=""
     >
       <!-- X/Close icon SVG -->
       <svg

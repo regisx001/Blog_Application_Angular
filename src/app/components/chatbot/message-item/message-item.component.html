@@ -8,11 +8,12 @@
   <!-- User message -->
   <ng-container *ngIf="message.sender === 'user'">
     <div
+      id="something"
       [ngClass]="
-        isFullscreen
-          ? 'mr-4 bg-gray-100 py-3 px-4 rounded-lg max-w-prose'
-          : 'chat-bubble-user py-2 px-3 max-w-xs'
+        isFullscreen ? 'mr-4 py-3 px-4 max-w-prose' : ' py-2 px-3 max-w-xs'
       "
+      [ngStyle]="{ 'border-radius': '18px 18px 0 18px' }"
+      class="bg-slate-600"
     >
       <p
         [class.text-sm]="!isFullscreen"
@@ -59,9 +60,11 @@
     <div
       [ngClass]="
         isFullscreen
-          ? 'ml-4 chat-bubble-bot py-3 px-4 rounded-lg max-w-prose'
-          : 'ml-2 chat-bubble-bot py-2 px-3 max-w-xs'
+          ? 'ml-4  py-3 px-4 rounded-lg max-w-prose'
+          : 'ml-2  py-2 px-3 max-w-xs'
       "
+      class="bg-teal-700"
+      [ngStyle]="{ 'border-radius': '18px 18px 0 18px' }"
     >
       <p
         [class.text-sm]="!isFullscreen"
