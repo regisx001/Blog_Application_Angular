@@ -8,7 +8,6 @@ import { ChatWindowComponent } from './chat-window/chat-window.component';
   selector: 'app-chatbot',
   imports: [ChatButtonComponent, FullscreenChatComponent, ChatWindowComponent],
   templateUrl: './chatbot.component.html',
-  styleUrls: ['./chatbot.component.css'],
 })
 export class ChatbotComponent {
   chatService = inject(ChatService);
