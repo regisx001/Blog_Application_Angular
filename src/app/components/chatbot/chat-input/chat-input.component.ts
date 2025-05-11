@@ -2,9 +2,19 @@ import { Component, Input, ViewChild, ElementRef, inject } from '@angular/core';
 import { ChatService } from '../../../services/chat.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { TextareaModule } from 'primeng/textarea';
+
 @Component({
   selector: 'app-chat-input',
-  imports: [FormsModule, CommonModule],
+  imports: [
+    FormsModule,
+    CommonModule,
+    ButtonModule,
+    InputTextModule,
+    TextareaModule,
+  ],
   templateUrl: './chat-input.component.html',
 })
 export class ChatInputComponent {
