@@ -1,41 +1,52 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../../auth/auth.service';
-import { Router, RouterModule } from '@angular/router';
-import { InputTextModule } from 'primeng/inputtext';
-import { ButtonModule } from 'primeng/button';
-import { RippleModule } from 'primeng/ripple';
-import { CheckboxModule } from 'primeng/checkbox';
-import { PasswordModule } from 'primeng/password';
+import { AuthService } from '../../core/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [
-    FormsModule,
-    ButtonModule,
-    RouterModule,
-    InputTextModule,
-    RippleModule,
-    CheckboxModule,
-    PasswordModule,
-  ],
+  imports: [CommonModule, FormsModule],
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
   authService = inject(AuthService);
   router = inject(Router);
 
-  credentiels = {
+  credentials = {
     email: '',
     password: '',
   };
-  checked = false;
+
+  isLoading = false;
+  errorMessage = '';
 
   onLogin() {
-    this.authService.login(this.credentiels);
+    if (!this.credentials.email || !this.credentials.password) {
+      this.errorMessage = 'Please fill in all fields';
+      return;
+    }
+
+    this.isLoading = true;
+    this.errorMessage = '';
+
+    this.authService.login(this.credentials).subscribe({
+      next: (response) => {
+        console.log('Login successful:', response);
+        this.router.navigate(['/dashboard']);
+      },
+      error: (error) => {
+        console.error('Login failed:', error);
+        this.errorMessage = 'Login failed. Please check your credentials.';
+        this.isLoading = false;
+      },
+      complete: () => {
+        this.isLoading = false;
+      },
+    });
   }
 
-  dataStringify() {
-    return JSON.stringify(this.credentiels);
+  stringCredentials() {
+    return JSON.stringify(this.credentials);
   }
 }
