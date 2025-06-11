@@ -1,7 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, RouterOutlet, Router } from '@angular/router';
 import { AuthService } from '../../../core/auth/auth.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -9,11 +10,13 @@ import { AuthService } from '../../../core/auth/auth.service';
   template: `<router-outlet></router-outlet> `,
   styles: [],
 })
-export class DashboardLayoutComponent {
+export class DashboardLayoutComponent implements OnInit, OnDestroy {
   authService = inject(AuthService);
   router = inject(Router);
 
-  sidebarOpen = false;
+  private destroy$ = new Subject<void>();
+  currentUser: User | null = null;
+  isAuthenticated = false;
 
   getCurrentUser(): User | null {
     try {
@@ -23,31 +26,23 @@ export class DashboardLayoutComponent {
     }
   }
 
-  getUserInitials(): string {
-    const user = this.getCurrentUser();
-    const username = user?.username || 'User';
-    return username.charAt(0).toUpperCase();
-  }
+  ngOnInit(): void {
+    // Subscribe to reactive user data
+    this.authService.currentUser$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((user) => {
+        this.currentUser = user;
+      });
 
-  getPageTitle(): string {
-    const url = this.router.url;
-    if (url.includes('/overview')) return 'Dashboard Overview';
-    // if (url.includes('/posts')) return 'My Posts';
-    // if (url.includes('/analytics')) return 'Analytics';
-    // if (url.includes('/comments')) return 'Comments';
-    if (url.includes('/settings')) return 'Settings';
-    return 'Dashboard';
+    // Subscribe to authentication state
+    this.authService.isAuthenticated$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((isAuth) => {
+        this.isAuthenticated = isAuth;
+      });
   }
-
-  toggleSidebar() {
-    this.sidebarOpen = !this.sidebarOpen;
-  }
-
-  logout() {
-    this.authService.logout();
-  }
-
-  goToProfile() {
-    this.router.navigate(['/profile']);
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

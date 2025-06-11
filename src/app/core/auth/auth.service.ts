@@ -34,6 +34,29 @@ export class AuthService {
   tokenService = inject(TokenService);
   router = inject(Router);
 
+  // Reactive user state
+  private currentUserSubject = new BehaviorSubject<User | null>(null);
+  public currentUser$ = this.currentUserSubject.asObservable();
+
+  // Authentication state
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
+  public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
+
+  constructor() {
+    // Initialize with stored user data on service creation
+    this.initializeAuthState();
+  }
+
+  private initializeAuthState(): void {
+    const storedUser = this.tokenService.getUserInfo();
+    const hasToken = !!this.tokenService.getAccessToken();
+
+    if (storedUser && hasToken) {
+      this.currentUserSubject.next(storedUser);
+      this.isAuthenticatedSubject.next(true);
+    }
+  }
+
   login(credentials: LoginRequest): Observable<LoginResponse> {
     return this.http
       .post<LoginResponse>(`${this.BACKEND_URL}/auth/login`, credentials)
@@ -49,6 +72,9 @@ export class AuthService {
             tap((userInfo) => {
               // Store user info in localStorage
               this.tokenService.setUserInfo(userInfo);
+              // Update reactive state
+              this.currentUserSubject.next(userInfo);
+              this.isAuthenticatedSubject.next(true);
               console.log('User info stored:', userInfo);
             }),
             map(() => response) // Return the original login response
@@ -79,16 +105,32 @@ export class AuthService {
   }
 
   logout(): void {
-    this.tokenService.removeTokens();
+    this.clearAuthState();
     this.router.navigate(['/login']);
+  }
+
+  private clearAuthState(): void {
+    this.tokenService.removeTokens();
+    this.currentUserSubject.next(null);
+    this.isAuthenticatedSubject.next(false);
   }
 
   isAuthenticated(): boolean {
     return !!this.tokenService.getAccessToken();
   }
 
-  getCurrentUser(): User {
-    return this.tokenService.getUserInfo();
+  getCurrentUser(): User | null {
+    return this.currentUserSubject.value;
+  }
+
+  // Method to update user data and reactive state
+  updateUser(userData: Partial<User>): void {
+    const currentUser = this.getCurrentUser();
+    if (currentUser) {
+      const updatedUser = { ...currentUser, ...userData };
+      this.tokenService.setUserInfo(updatedUser);
+      this.currentUserSubject.next(updatedUser);
+    }
   }
 
   getUserInfo(): Observable<User> {
@@ -99,5 +141,13 @@ export class AuthService {
     });
   }
 
-  constructor() {}
+  // Method to refresh user data from server
+  refreshUserInfo(): Observable<User> {
+    return this.getUserInfo().pipe(
+      tap((userInfo) => {
+        this.tokenService.setUserInfo(userInfo);
+        this.currentUserSubject.next(userInfo);
+      })
+    );
+  }
 }
