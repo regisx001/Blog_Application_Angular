@@ -3,10 +3,21 @@
 @plugin '@tailwindcss/forms';
 @plugin "tailwindcss-primeui";
 
+/* Global Dark Mode Styles */
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
   height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+
 /* Used by all components */
 .chat-container {
   max-height: 350px;

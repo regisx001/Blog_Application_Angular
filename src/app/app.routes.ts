@@ -1,15 +1,20 @@
 import { Routes } from '@angular/router';
-// import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
-import { LayoutComponent } from './components/layout/layout.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { authGuard } from './auth/auth.guard';
-import { redirectIfAuthenticatedGuard } from './auth/redirect-if-authenticated.guard';
-import { ProfileComponent } from './pages/profile/profile.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { DashboardLayoutComponent } from './components/layout/dashboard/dashboard.component';
+import {
+  authGuard,
+  redirectIfAuthenticatedGuard,
+} from './core/auth/auth.guard';
+import { DashboardOverviewComponent } from './pages/dashboard/overview.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  {
+    path: '',
+    redirectTo: '/dashboard',
+    pathMatch: 'full',
+  },
   {
     path: 'login',
     component: LoginComponent,
@@ -21,19 +26,17 @@ export const routes: Routes = [
     canActivate: [redirectIfAuthenticatedGuard],
   },
   {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [authGuard],
+  },
+  {
     path: 'dashboard',
-    component: LayoutComponent,
+    component: DashboardLayoutComponent,
+    canActivate: [authGuard],
     children: [
-      {
-        path: '',
-        component: DashboardComponent,
-        canActivate: [authGuard],
-      },
-      {
-        path: 'profile',
-        component: ProfileComponent,
-        canActivate: [authGuard],
-      },
+      { path: '', redirectTo: 'overview', pathMatch: 'full' },
+      { path: 'overview', component: DashboardOverviewComponent },
     ],
   },
 ];
