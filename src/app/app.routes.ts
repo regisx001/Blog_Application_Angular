@@ -8,9 +8,10 @@ import { redirectIfAuthenticatedGuard } from './core/auth/redirect-if-authentica
 import { ProfileComponent } from './pages/profile/profile.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { DashboardLayoutComponent } from './components/layout/dashboard/dashboard.component';
+import { HomeComponent } from './pages/home/home.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', component: HomeComponent },
   {
     path: 'login',
     component: LoginComponent,

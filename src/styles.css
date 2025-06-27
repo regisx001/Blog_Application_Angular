@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 @import "tailwindcss";
 @import "primeicons/primeicons.css";
 
@@ -9,7 +9,8 @@
 html,
 body {
   height: 100%;
-  font-family: "Inconsolata", monospace;
+  /* font-family: "DM Serif Display", serif; */
+  font-family: "Open Sans", sans-serif;
 }
 /* Used by all components */
 .chat-container {
@@ -34,4 +35,8 @@ body {
 .fullscreen-chat-container {
   height: calc(100vh - 120px);
   max-height: unset;
+}
+
+.font-dm-serif {
+  font-family: "DM Serif Display", serif;
 }
