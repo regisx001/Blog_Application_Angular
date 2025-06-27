@@ -1,5 +1,146 @@
-<p>profile works!</p>
+<div
+  class="min-h-screen bg-surface-0 text-surface-900 dark:bg-surface-950 dark:text-surface-50"
+>
+  <!-- Header Section -->
+  <div class="bg-gradient-to-r from-primary-600 to-primary-700 py-16">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row items-center gap-8">
+        <div class="flex-shrink-0">
+          <img
+            [src]="'http://localhost:8080' + user?.avatar"
+            alt="User Avatar"
+            class="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-surface-0 object-cover shadow-xl"
+            *ngIf="user?.avatar; else noAvatar"
+          />
+          <ng-template #noAvatar>
+            <div
+              class="w-32 h-32 md:w-40 md:h-40 rounded-full bg-surface-200 dark:bg-surface-800 flex items-center justify-center text-5xl md:text-6xl text-surface-400 border-4 border-surface-0"
+            >
+              <i class="pi pi-user"></i>
+            </div>
+          </ng-template>
+        </div>
+        <div class="text-center md:text-left">
+          <h1 class="text-4xl md:text-5xl font-bold mb-2 text-surface-0">
+            {{ user?.username }}
+          </h1>
+          <p class="text-xl text-surface-100 mb-4">{{ user?.fullName }}</p>
+          <div class="flex flex-wrap justify-center md:justify-start gap-2">
+            <span
+              *ngFor="let role of user?.roles"
+              class="inline-block bg-surface-0/20 backdrop-blur-sm text-surface-0 text-sm px-3 py-1 rounded-full"
+            >
+              <i class="pi pi-shield mr-1"></i>{{ role }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<pre>
-    <code>{{getData()}}</code>
+  <!-- Main Content -->
+  <div class="max-w-6xl mx-auto px-6 py-12">
+    <!-- Basic Information Section -->
+    <div class="mb-12">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+        <i class="pi pi-user text-primary-500"></i>
+        Basic Information
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div
+          class="bg-surface-50 dark:bg-surface-900 rounded-lg p-6 border border-surface-200 dark:border-surface-700"
+        >
+          <div class="flex items-center gap-3 mb-2">
+            <i class="pi pi-envelope text-primary-500"></i>
+            <span class="font-semibold text-surface-600 dark:text-surface-300"
+              >Email</span
+            >
+          </div>
+          <p class="text-surface-900 dark:text-surface-50">{{ user?.email }}</p>
+        </div>
+        <div
+          class="bg-surface-50 dark:bg-surface-900 rounded-lg p-6 border border-surface-200 dark:border-surface-700"
+        >
+          <div class="flex items-center gap-3 mb-2">
+            <i class="pi pi-phone text-primary-500"></i>
+            <span class="font-semibold text-surface-600 dark:text-surface-300"
+              >Phone</span
+            >
+          </div>
+          <p class="text-surface-900 dark:text-surface-50">{{ user?.phone }}</p>
+        </div>
+        <div
+          class="bg-surface-50 dark:bg-surface-900 rounded-lg p-6 border border-surface-200 dark:border-surface-700"
+        >
+          <div class="flex items-center gap-3 mb-2">
+            <i class="pi pi-id-card text-primary-500"></i>
+            <span class="font-semibold text-surface-600 dark:text-surface-300"
+              >User ID</span
+            >
+          </div>
+          <p class="text-surface-900 dark:text-surface-50">{{ user?.id }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Account Status Section -->
+    <div class="mb-12">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+        <i class="pi pi-cog text-primary-500"></i>
+        Account Status
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div
+          class="bg-surface-50 dark:bg-surface-900 rounded-lg p-6 border border-surface-200 dark:border-surface-700"
+        >
+          <div class="flex items-center gap-3 mb-2">
+            <i class="pi pi-check-circle text-green-500"></i>
+            <span class="font-semibold text-surface-600 dark:text-surface-300"
+              >Status</span
+            >
+          </div>
+          <span
+            class="inline-block bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-sm px-3 py-1 rounded-full"
+            *ngIf="user?.enabled"
+            >Active</span
+          >
+          <span
+            class="inline-block bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 text-sm px-3 py-1 rounded-full"
+            *ngIf="!user?.enabled"
+            >Inactive</span
+          >
+        </div>
+        <div
+          class="bg-surface-50 dark:bg-surface-900 rounded-lg p-6 border border-surface-200 dark:border-surface-700"
+        >
+          <div class="flex items-center gap-3 mb-2">
+            <i class="pi pi-calendar text-primary-500"></i>
+            <span class="font-semibold text-surface-600 dark:text-surface-300"
+              >Joined</span
+            >
+          </div>
+          <p class="text-surface-900 dark:text-surface-50">
+            {{ user?.createdAt | date : "medium" }}
+          </p>
+        </div>
+        <div
+          class="bg-surface-50 dark:bg-surface-900 rounded-lg p-6 border border-surface-200 dark:border-surface-700"
+        >
+          <div class="flex items-center gap-3 mb-2">
+            <i class="pi pi-refresh text-primary-500"></i>
+            <span class="font-semibold text-surface-600 dark:text-surface-300"
+              >Last Updated</span
+            >
+          </div>
+          <p class="text-surface-900 dark:text-surface-50">
+            {{ user?.updatedAt | date : "medium" }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<pre class="hidden">
+                <code>{{getData()}}</code>
 </pre>

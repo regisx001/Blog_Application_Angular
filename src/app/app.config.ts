@@ -8,8 +8,9 @@ import { definePreset } from '@primeng/themes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
+import Lara from '@primeng/themes/lara';
 
-const Noir = definePreset(Aura, {
+const Noir = definePreset(Lara, {
   semantic: {
     primary: {
       50: '{zinc.50}',

@@ -7,6 +7,7 @@ import { authGuard } from './core/auth/auth.guard';
 import { redirectIfAuthenticatedGuard } from './core/auth/redirect-if-authenticated.guard';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { DashboardLayoutComponent } from './components/layout/dashboard/dashboard.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -22,7 +23,7 @@ export const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: LayoutComponent,
+    component: DashboardLayoutComponent,
     children: [
       {
         path: '',

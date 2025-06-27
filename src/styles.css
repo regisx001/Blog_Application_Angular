@@ -1,4 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap");
 @import "tailwindcss";
+@import "primeicons/primeicons.css";
+
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/forms';
 @plugin "tailwindcss-primeui";
@@ -6,6 +9,7 @@
 html,
 body {
   height: 100%;
+  font-family: "Inconsolata", monospace;
 }
 /* Used by all components */
 .chat-container {

@@ -44,6 +44,9 @@ importers:
       postcss:
         specifier: ^8.5.3
         version: 8.5.3
+      primeicons:
+        specifier: ^7.0.0
+        version: 7.0.0
       primeng:
         specifier: ^19.1.2
         version: 19.1.2(c46b341b4e50c9bedb48f6aef8386b7c)
@@ -3654,6 +3657,9 @@ packages:
   postcss@8.5.3:
     resolution: {integrity: sha512-dle9A3yYxlBSrt8Fu+IpjGT8SY8hN0mlaA6GY8t0P5PjIOZemULz/E2Bnm/2dcUOena75OTNkHI76uZBNUUq3A==}
     engines: {node: ^10 || ^12 || >=14}
+
+  primeicons@7.0.0:
+    resolution: {integrity: sha512-jK3Et9UzwzTsd6tzl2RmwrVY/b8raJ3QZLzoDACj+oTJ0oX7L9Hy+XnVwgo4QVKlKpnP/Ur13SXV/pVh4LzaDw==}
 
   primeng@19.1.2:
     resolution: {integrity: sha512-iu4lDrStBPCyYn+iSfofp/Hsv/dHVlnlsOhqFZlYTQB1o+MlVXa4PanLgHdoBr1thy3ozRkNDZHsICkUecWu0A==}
@@ -8270,6 +8276,8 @@ snapshots:
       nanoid: 3.3.11
       picocolors: 1.1.1
       source-map-js: 1.2.1
+
+  primeicons@7.0.0: {}
 
   primeng@19.1.2(c46b341b4e50c9bedb48f6aef8386b7c):
     dependencies:
