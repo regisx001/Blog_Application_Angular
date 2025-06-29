@@ -63,6 +63,7 @@ export class AuthService {
       )
       .subscribe((res) => {
         this.saveTokens(res.accessToken, res.refreshToken);
+        this.initializeAuth();
         this.router.navigate(['/dashboard/profile']);
       });
   }
@@ -135,5 +136,6 @@ export class AuthService {
   logout(): void {
     localStorage.clear();
     this.router.navigate(['/login']);
+    this.currentUser.set(undefined);
   }
 }
