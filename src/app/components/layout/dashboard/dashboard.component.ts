@@ -37,6 +37,11 @@ export class DashboardLayoutComponent implements OnInit {
         icon: 'pi pi-user',
         route: '/dashboard/profile',
       },
+      {
+        label: 'Verify Account',
+        icon: 'pi pi-verified',
+        route: '/dashboard/verify',
+      },
     ];
   }
 }

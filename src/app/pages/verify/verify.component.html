@@ -1,0 +1,19 @@
+@if (authService.currentUser(); as user) {
+<div class="p-6 rounded-lg shadow">
+  <h1 class="text-2xl font-bold mb-4">Welcome back, {{ user.username }}!</h1>
+  <div class="space-y-2">
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>User ID:</strong> {{ user.id }}</p>
+    <p><strong>Enabled:</strong> {{ user.enabled }}</p>
+    <p><strong>Roles:</strong> {{ user.roles }}</p>
+  </div>
+</div>
+}
+
+<p-inputotp [(ngModel)]="value" [length]="6" />
+
+<br />
+{{ value }}
+<br />
+
+<p-button (onClick)="verifyAccount()">Verify</p-button>

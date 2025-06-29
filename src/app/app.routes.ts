@@ -9,6 +9,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { DashboardLayoutComponent } from './components/layout/dashboard/dashboard.component';
 import { HomeComponent } from './pages/home/home.component';
+import { VerifyComponent } from './pages/verify/verify.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -34,6 +35,11 @@ export const routes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent,
+        canActivate: [authGuard],
+      },
+      {
+        path: 'verify',
+        component: VerifyComponent,
         canActivate: [authGuard],
       },
     ],
