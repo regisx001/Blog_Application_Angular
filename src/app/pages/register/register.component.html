@@ -52,70 +52,98 @@
             </g>
           </svg>
           <div
-            class="text-surface-900 dark:text-surface-0 text-3xl font-medium mb-4"
+            class="font-dm-serif text-surface-900 dark:text-surface-0 text-4xl font-medium mb-4"
           >
             Welcome to PrimeLand!
           </div>
           <span class="text-muted-color font-medium">Sign up to continue</span>
         </div>
 
-        <div>
-          <label
-            for="email1"
-            class="block text-surface-900 dark:text-surface-0 text-xl font-medium mb-2"
-            >Email</label
-          >
-          <input
-            pInputText
-            id="email1"
-            type="text"
-            placeholder="Email address"
-            class="w-full md:w-[30rem] mb-8"
-            [(ngModel)]="credentiels.email"
-          />
-
-          <label
-            for="password1"
-            class="block text-surface-900 dark:text-surface-0 font-medium text-xl mb-2"
-            >Password</label
-          >
-          <p-password
-            id="password1"
-            [(ngModel)]="credentiels.password"
-            placeholder="Password"
-            [toggleMask]="true"
-            styleClass="mb-4"
-            [fluid]="true"
-            [feedback]="false"
-          ></p-password>
-
-          <label
-            for="password1"
-            class="block text-surface-900 dark:text-surface-0 font-medium text-xl mb-2"
-            >Password Confirm</label
-          >
-          <p-password
-            id="password1"
-            placeholder="Password Confirm"
-            [toggleMask]="true"
-            styleClass="mb-4"
-            [fluid]="true"
-            [feedback]="false"
-          ></p-password>
-
-          <div class="flex items-center justify-between mt-2 mb-8 gap-8">
-            <a class="font-bold" routerLink="/login">Sign in</a>
-            <span
-              class="font-medium no-underline ml-2 text-right cursor-pointer text-primary"
-              >Forgot password?</span
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <div>
+            <label
+              for="email"
+              class="block text-surface-900 dark:text-surface-0 text-xl font-medium mb-2"
+              >Email</label
             >
+            <input
+              pInputText
+              id="email"
+              type="email"
+              formControlName="email"
+              placeholder="Email address"
+              class="w-full md:w-[30rem]"
+              [class.ng-invalid]="isFieldInvalid('email')"
+            />
+            <br />
+
+            @if (isFieldInvalid('email')) {
+            <small class="text-red-500">
+              @if (hasError('email', 'required')) { Email is required } @if
+              (hasError('email', 'email')) { Please enter a valid email address
+              }
+            </small>
+            }
+
+            <label
+              for="username"
+              class="block text-surface-900 dark:text-surface-0 text-xl font-medium mb-2 mt-8"
+              >Username</label
+            >
+            <input
+              pInputText
+              id="username"
+              formControlName="username"
+              type="text"
+              placeholder="Username"
+              class="w-full md:w-[30rem]"
+              [class.ng-invalid]="isFieldInvalid('username')"
+            />
+            <br />
+            @if (isFieldInvalid('username')) {
+            <small class="text-red-500">
+              @if (hasError('username', 'required')) { Username is required }
+              @if (hasError('username', 'minlength')) { Must be at least 2
+              characters }
+            </small>
+            }
+
+            <label
+              for="password1"
+              class="block text-surface-900 dark:text-surface-0 font-medium text-xl mb-2 mt-8"
+              >Password</label
+            >
+            <p-password
+              id="password1"
+              formControlName="password"
+              placeholder="Password"
+              [toggleMask]="true"
+              styleClass=""
+              [fluid]="true"
+              [feedback]="false"
+              [class.ng-invalid]="isFieldInvalid('password')"
+            ></p-password>
+
+            @if (isFieldInvalid('password')) {
+            <small class="text-red-500">
+              Password must be at least 8 characters long
+            </small>
+            }
+
+            <div class="flex items-center justify-between mt-2 mb-8 mt-4 gap-8">
+              <a class="font-bold" routerLink="/login">Sign in</a>
+              <span
+                class="font-medium no-underline ml-2 text-right cursor-pointer text-primary"
+                >Forgot password?</span
+              >
+            </div>
+            <p-button
+              label="Sign Up"
+              styleClass="w-full"
+              type="submit"
+            ></p-button>
           </div>
-          <p-button
-            label="Sign Up"
-            styleClass="w-full"
-            (onClick)="onLogin()"
-          ></p-button>
-        </div>
+        </form>
       </div>
     </div>
   </div>

@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
 
   data: any[] = [];
   error = null;
-  private authService = inject(AuthService);
+  authService = inject(AuthService);
 
   ngOnInit() {
     this.http.get<{ content: any[] }>(this.BACKEND_URL + '/users').subscribe(
